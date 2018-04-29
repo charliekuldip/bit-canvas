@@ -1,48 +1,39 @@
 import React from 'react';
 
-function triggerClick(e) {
-    console.log('e: ', e);
-}
+export default class ImageUploader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            image_loaded: null,
+        };
+    }
 
-function readURL(input) {
-    console.log('This is input: ', input);
-    console.log('THis is this', this);
+    imageUpload = (e) => {
+        const file = e.target.files[0];
+        // getBase64(file).then(base64 => {
+        //     localStorage["fileBase64"] = base64;
+        //     console.debug("file stored",base64);
+        // });
 
-    console.log('ONE input.files[0]: ', input.files[0]);
-    
-    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        let imgUploadEl = document.getElementById('imageFileEl');
+
+        reader.onload = (e)=> { 
+            imgUploadEl.src = e.target.result;
+            this.setState({image_loaded: 'loaded'});
+        }
+
+        reader.readAsDataURL(file);
+    };  
   
-      var reader = new FileReader();
-      console.log('reader: ', reader);
-  
-    //   reader.onload = function(e) {
-    reader.addEventListener('onload', function(e) {
-        console.log('e from onload!: ', e);
-        console.log('input: ', input);
-        console.log('input.files[0]', input.files[0]);
-
-        let img = document.getElementById('img-uploader__img');
-        let title = document.getElementById('img-uploader__title');
-        
-        img.src = e.target.result;
-        // $('.file-upload-image').attr('src', e.target.result);
-
-        title.innerHtml(input.files[0].name);
-      });
-  
-      reader.readAsDataURL(input.files[0]);
-  
-    } 
-    // else { removeUpload(); }
-  }
-
-export default function ImageUploader(props) {
-    return (
-        <div className="img-uploader">
-            <img src="" id="img-uploader__img" className="img-uploader__img" alt="bit src" />
-            <input type="file" id="img-uploader__input" className="img-uploader__input" onChange={readURL.bind(this)} />
-            <div id="img-uploader__title" className="img-uploader__title"></div>
-            <button className="img-uploader__btn" type="button" onClick={triggerClick}>Add Image</button>
-        </div>
-    );
+    render() {
+        return <div className="container">
+            <input 
+            type="file" 
+            id="imageFile" 
+            name='imageFile' 
+            onChange={this.imageUpload} />
+            <img id="imageFileEl" src="" alt="Pix Source" className="imageFileEl" />
+        </div>;
+    }
 }
