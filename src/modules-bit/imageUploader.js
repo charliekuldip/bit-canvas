@@ -10,7 +10,7 @@ export default class ImageUploader extends React.Component {
             <h1>{x}</h1>
 
             {image_src ? <img id="imageFileEl" src={image_src} alt="Pix Source" className="imageFileEl" /> :null }
-            
+            <canvas id="canvas"></canvas>
             <input type="file" id="imageFile" key="imageFile" name='imageFile' onChange={handleChange} />
 
         </div>;

@@ -60,6 +60,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="app">
+
                 <ImageUploader image_src={this.state.image_src} handleChange={this.handleChange} />
 
                 <select id="bit" className="bit-select" 
@@ -79,11 +80,6 @@ export default class App extends React.Component {
                     <option>SEGA CD</option>
                 </select>
                 
-                <div id="canvas-container" className="canvas-container flex flex-row">
-                    <canvas id="canvas"></canvas>
-                    <div id="color"></div>
-                </div>
-
             </div>
         )
     }
