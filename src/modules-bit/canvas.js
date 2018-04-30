@@ -20,10 +20,15 @@ export function createImage(canvas, src) {
 
     
     img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
+        canvas.width = 128;
+        canvas.height = 120;
         
-        ctx.drawImage(img, 0, 0);
+
+        ctx.drawImage(
+            img, 
+            0, 0, img.width, img.height,
+            0, 0, 128, 120
+        );
         img.style.display = 'none';
     };
 

@@ -33,3 +33,10 @@ img {
 select {
     margin-right: 1rem;
 }
+
+canvas {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    image-rendering: pixelated;
+}
